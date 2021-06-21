@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/Models/TagsModel.dart';
 import '../util/multi_select_list_type.dart';
 import '../util/multi_select_item.dart';
 import '../chip_display/multi_select_chip_display.dart';
@@ -91,6 +92,12 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Set the color of the check in the checkbox
   final Color? checkColor;
 
+  final TagsModel? tagsModel;
+
+  final TextEditingController? addTagCont;
+
+  final Function(Map<String, dynamic>)? addDocument;
+
   final AutovalidateMode autovalidateMode;
   final FormFieldValidator<List<V>>? validator;
   final FormFieldSetter<List<V>>? onSaved;
@@ -128,6 +135,9 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     this.validator,
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
+    this.tagsModel,
+    this.addTagCont,
+    this.addDocument,
     this.key,
   }) : super(
             key: key,
@@ -165,6 +175,9 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 searchHintStyle: searchHintStyle,
                 selectedItemsTextStyle: selectedItemsTextStyle,
                 checkColor: checkColor,
+                    tagsModel: tagsModel,
+                    addTagCont: addTagCont,
+                    addDocument: addDocument,
               );
               return _MultiSelectDialogFieldView<V?>._withState(field as _MultiSelectDialogFieldView<V?>, state);
             });
@@ -199,6 +212,9 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final TextStyle? searchTextStyle;
   final TextStyle? searchHintStyle;
   final Color? checkColor;
+  final TagsModel? tagsModel;
+  final TextEditingController? addTagCont;
+  final Function(Map<String, dynamic>)? addDocument;
   FormFieldState<List<V>>? state;
 
   _MultiSelectDialogFieldView({
@@ -229,6 +245,9 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
     this.searchHintStyle,
     this.selectedItemsTextStyle,
     this.checkColor,
+    this.tagsModel,
+    this.addTagCont,
+    this.addDocument
   });
 
   /// This constructor allows a FormFieldState to be passed in. Called by MultiSelectDialogField.
@@ -261,7 +280,10 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
         searchTextStyle = field.searchTextStyle,
         selectedItemsTextStyle = field.selectedItemsTextStyle,
         checkColor = field.checkColor,
-        state = state;
+        tagsModel = field.tagsModel,
+        addTagCont = field.addTagCont,
+        addDocument = field.addDocument,
+      state = state;
 
   @override
   __MultiSelectDialogFieldViewState createState() =>
@@ -364,6 +386,9 @@ class __MultiSelectDialogFieldViewState<V>
           searchable: widget.searchable ?? false,
           confirmText: widget.confirmText,
           cancelText: widget.cancelText,
+          tagsModel: widget.tagsModel,
+          addTagCont: widget.addTagCont,
+          addDocument: widget.addDocument,
           onConfirm: (selected) {
             if (widget.state != null) {
               widget.state!.didChange(selected);

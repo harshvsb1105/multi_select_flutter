@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/Models/TagsModel.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '../util/multi_select_actions.dart';
 import '../util/multi_select_item.dart';
 import '../util/multi_select_list_type.dart';
@@ -72,6 +74,13 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
   /// Set the color of the check in the checkbox
   final Color? checkColor;
 
+  final TagsModel? tagsModel;
+
+  final TextEditingController? addTagCont;
+
+  final Function(Map<String, dynamic>)? addDocument;
+
+
   MultiSelectDialog({
     required this.items,
     required this.initialValue,
@@ -95,6 +104,9 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
     this.searchTextStyle,
     this.selectedItemsTextStyle,
     this.checkColor,
+    this.tagsModel,
+    this.addTagCont,
+    this.addDocument
   });
 
   @override
@@ -223,7 +235,15 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                                         Theme.of(context).primaryColor,
                                   ),
                                 ),
-                              ),
+                              ).copyWith(suffixIcon: AppButton(
+                                textColor: Colors.black,
+                                text: 'Add',
+                                onTap: () {
+                                  widget.tagsModel!.name = widget.addTagCont!.text;
+                                  widget.addDocument!(widget.tagsModel!.toJson());
+                                  widget.addTagCont!.clear();
+                                },
+                              ).paddingRight(8).visible(true),),
                               onChanged: (val) {
                                 setState(() {
                                   _items = widget.updateSearchQuery(
