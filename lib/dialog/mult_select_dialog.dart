@@ -231,7 +231,7 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                             padding: EdgeInsets.only(left: 10),
                             child: widget.addButton == true
                                 ? TextField(
-                              // controller: widget.addTagCont,
+                              controller: widget.addTagCont,
                               style: widget.searchTextStyle,
                               decoration: InputDecoration(
                                 hintStyle: widget.searchHintStyle,
@@ -249,8 +249,9 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                                   onPressed: () {
                                     print("blah blah");
                                      // widget.addDocument;
-                                    widget.tagsModel!.name;
-                                    print("zzzzzzz:::${widget.tagsModel!.name}");
+                                    widget.tagsModel!.name = widget.addTagCont!.text ?? "";
+                                    print("zzzzzzz:::${widget.tagsModel!.name ?? ""}");
+                                    widget.tagsModel!.news = [];
                                     widget.addDocument!(widget.tagsModel!.toJson());
                                     widget.addTagCont!.clear();
                                   }
@@ -259,8 +260,8 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                               )),
                               onChanged: (val) {
                                 setState(() {
-                                  widget.tagsModel!.name = val;
-                                  print("name:: ${widget.tagsModel!.name}");
+                                  // widget.tagsModel!.name = val;
+                                  // print("name:: ${widget.tagsModel!.name}");
                                   _items = widget.updateSearchQuery(
                                       val, widget.items);
                                 });
