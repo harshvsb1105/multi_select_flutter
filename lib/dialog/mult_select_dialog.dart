@@ -77,7 +77,7 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
 
   final TextEditingController? addTagCont;
 
-  final void Function(V)? addDocument;
+  final void Function(List<V>)? addDocument;
 
   final bool? addButton;
 
@@ -252,7 +252,7 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                                     // widget.tagsModel!.name = widget.addTagCont!.text ?? "";
                                     // print("zzzzzzz:::${widget.tagsModel!.name ?? ""}");
                                     // widget.tagsModel!.news = [];
-                                    widget.addDocument!;
+                                    widget.addDocument!(_selectedValues);
                                     widget.addTagCont!.clear();
                                   }
 
