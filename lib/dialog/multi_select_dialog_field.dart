@@ -92,11 +92,11 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Set the color of the check in the checkbox
   final Color? checkColor;
 
-  final TagsModel? tagsModel;
+  // final TagsModel? tagsModel;
 
   final TextEditingController? addTagCont;
 
-  final void Function(Map<String, dynamic>)? addDocument;
+  final void Function(V)? addDocument;
 
   final bool? addButton;
 
@@ -138,7 +138,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     this.validator,
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
-    this.tagsModel,
+    // this.tagsModel,
     this.addTagCont,
     this.addDocument,
     this.addButton,
@@ -179,7 +179,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 searchHintStyle: searchHintStyle,
                 selectedItemsTextStyle: selectedItemsTextStyle,
                 checkColor: checkColor,
-                tagsModel: tagsModel,
+                // tagsModel: tagsModel,
                 addTagCont: addTagCont,
                 addDocument: addDocument,
                 addButton: addButton,
@@ -219,9 +219,9 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final TextStyle? searchTextStyle;
   final TextStyle? searchHintStyle;
   final Color? checkColor;
-  final TagsModel? tagsModel;
+  // final TagsModel? tagsModel;
   final TextEditingController? addTagCont;
-  final void Function(Map<String, dynamic>)? addDocument;
+  final void Function(V)? addDocument;
   final bool? addButton;
   FormFieldState<List<V>>? state;
 
@@ -254,7 +254,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
       this.searchHintStyle,
       this.selectedItemsTextStyle,
       this.checkColor,
-      this.tagsModel,
+      // this.tagsModel,
       this.addTagCont,
       this.addDocument,
       this.addButton});
@@ -289,7 +289,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
         searchTextStyle = field.searchTextStyle,
         selectedItemsTextStyle = field.selectedItemsTextStyle,
         checkColor = field.checkColor,
-        tagsModel = field.tagsModel,
+        // tagsModel = field.tagsModel,
         addTagCont = field.addTagCont,
         addDocument = field.addDocument,
         addButton = field.addButton,
@@ -397,7 +397,7 @@ class __MultiSelectDialogFieldViewState<V>
           searchable: widget.searchable ?? false,
           confirmText: widget.confirmText,
           cancelText: widget.cancelText,
-          tagsModel: widget.tagsModel,
+          // tagsModel: widget.tagsModel,
           addTagCont: widget.addTagCont,
           addDocument: widget.addDocument,
           addButton: widget.addButton,
