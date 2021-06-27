@@ -77,7 +77,7 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
   //
   // final TextEditingController? addTagCont;
 
-  final void Function()? addDocument;
+  final void Function(V)? addDocument;
 
   final bool? addButton;
 
