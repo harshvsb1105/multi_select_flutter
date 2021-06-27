@@ -250,6 +250,7 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                                     print("blah blah");
                                      // widget.addDocument;
                                     widget.tagsModel!.name;
+                                    print("zzzzzzz:::${widget.tagsModel!.name}");
                                     widget.addDocument!(widget.tagsModel!.toJson());
                                     widget.addTagCont!.clear();
                                   }
@@ -259,6 +260,7 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                               onChanged: (val) {
                                 setState(() {
                                   widget.tagsModel!.name = val;
+                                  print("name:: ${widget.tagsModel!.name}");
                                   _items = widget.updateSearchQuery(
                                       val, widget.items);
                                 });
