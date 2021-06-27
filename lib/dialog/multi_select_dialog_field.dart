@@ -98,6 +98,8 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
 
   final Function(Map<String, dynamic>)? addDocument;
 
+  final bool? addButton;
+
   final AutovalidateMode autovalidateMode;
   final FormFieldValidator<List<V>>? validator;
   final FormFieldSetter<List<V>>? onSaved;
@@ -138,6 +140,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     this.tagsModel,
     this.addTagCont,
     this.addDocument,
+    this.addButton,
     this.key,
   }) : super(
             key: key,
@@ -175,11 +178,13 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 searchHintStyle: searchHintStyle,
                 selectedItemsTextStyle: selectedItemsTextStyle,
                 checkColor: checkColor,
-                    tagsModel: tagsModel,
-                    addTagCont: addTagCont,
-                    addDocument: addDocument,
+                tagsModel: tagsModel,
+                addTagCont: addTagCont,
+                addDocument: addDocument,
+                addButton: addButton,
               );
-              return _MultiSelectDialogFieldView<V?>._withState(field as _MultiSelectDialogFieldView<V?>, state);
+              return _MultiSelectDialogFieldView<V?>._withState(
+                  field as _MultiSelectDialogFieldView<V?>, state);
             });
 }
 
@@ -215,40 +220,41 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final TagsModel? tagsModel;
   final TextEditingController? addTagCont;
   final Function(Map<String, dynamic>)? addDocument;
+  final bool? addButton;
   FormFieldState<List<V>>? state;
 
-  _MultiSelectDialogFieldView({
-    required this.items,
-    this.title,
-    this.buttonText,
-    this.buttonIcon,
-    this.listType,
-    this.decoration,
-    this.onSelectionChanged,
-    this.onConfirm,
-    this.chipDisplay,
-    this.initialValue,
-    this.searchable,
-    this.confirmText,
-    this.cancelText,
-    this.barrierColor,
-    this.selectedColor,
-    this.searchHint,
-    this.height,
-    this.colorator,
-    this.backgroundColor,
-    this.unselectedColor,
-    this.searchIcon,
-    this.closeSearchIcon,
-    this.itemsTextStyle,
-    this.searchTextStyle,
-    this.searchHintStyle,
-    this.selectedItemsTextStyle,
-    this.checkColor,
-    this.tagsModel,
-    this.addTagCont,
-    this.addDocument
-  });
+  _MultiSelectDialogFieldView(
+      {required this.items,
+      this.title,
+      this.buttonText,
+      this.buttonIcon,
+      this.listType,
+      this.decoration,
+      this.onSelectionChanged,
+      this.onConfirm,
+      this.chipDisplay,
+      this.initialValue,
+      this.searchable,
+      this.confirmText,
+      this.cancelText,
+      this.barrierColor,
+      this.selectedColor,
+      this.searchHint,
+      this.height,
+      this.colorator,
+      this.backgroundColor,
+      this.unselectedColor,
+      this.searchIcon,
+      this.closeSearchIcon,
+      this.itemsTextStyle,
+      this.searchTextStyle,
+      this.searchHintStyle,
+      this.selectedItemsTextStyle,
+      this.checkColor,
+      this.tagsModel,
+      this.addTagCont,
+      this.addDocument,
+      this.addButton});
 
   /// This constructor allows a FormFieldState to be passed in. Called by MultiSelectDialogField.
   _MultiSelectDialogFieldView._withState(
@@ -283,7 +289,8 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
         tagsModel = field.tagsModel,
         addTagCont = field.addTagCont,
         addDocument = field.addDocument,
-      state = state;
+        addButton = field.addButton,
+        state = state;
 
   @override
   __MultiSelectDialogFieldViewState createState() =>
@@ -304,8 +311,8 @@ class __MultiSelectDialogFieldViewState<V>
   Widget _buildInheritedChipDisplay() {
     List<MultiSelectItem<V>?> chipDisplayItems = [];
     chipDisplayItems = _selectedItems
-        .map((e) => widget.items
-            .firstWhereOrNull((element) => e == element.value))
+        .map((e) =>
+            widget.items.firstWhereOrNull((element) => e == element.value))
         .toList();
     chipDisplayItems.removeWhere((element) => element == null);
     if (widget.chipDisplay != null) {
@@ -389,6 +396,7 @@ class __MultiSelectDialogFieldViewState<V>
           tagsModel: widget.tagsModel,
           addTagCont: widget.addTagCont,
           addDocument: widget.addDocument,
+          addButton: widget.addButton,
           onConfirm: (selected) {
             if (widget.state != null) {
               widget.state!.didChange(selected);

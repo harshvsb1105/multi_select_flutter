@@ -79,6 +79,8 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
 
   final Function(Map<String, dynamic>)? addDocument;
 
+  final bool? addButton;
+
 
   MultiSelectDialog({
     required this.items,
@@ -105,7 +107,8 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
     this.checkColor,
     this.tagsModel,
     this.addTagCont,
-    this.addDocument
+    this.addDocument,
+    this.addButton
   });
 
   @override
@@ -223,7 +226,8 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                       ? Expanded(
                           child: Container(
                             padding: EdgeInsets.only(left: 10),
-                            child: TextField(
+                            child: widget.addButton == true
+                                ? TextField(
                               style: widget.searchTextStyle,
                               decoration: InputDecoration(
                                 hintStyle: widget.searchHintStyle,
@@ -245,6 +249,25 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                                   },
                                 ),
                               )),
+                              onChanged: (val) {
+                                setState(() {
+                                  _items = widget.updateSearchQuery(
+                                      val, widget.items);
+                                });
+                              },
+                            )
+                                : TextField(
+                              style: widget.searchTextStyle,
+                              decoration: InputDecoration(
+                                hintStyle: widget.searchHintStyle,
+                                hintText: widget.searchHint ?? "Search",
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: widget.selectedColor ??
+                                        Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ),
                               onChanged: (val) {
                                 setState(() {
                                   _items = widget.updateSearchQuery(
