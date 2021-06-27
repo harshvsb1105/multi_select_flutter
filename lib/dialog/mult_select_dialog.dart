@@ -73,13 +73,15 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
   /// Set the color of the check in the checkbox
   final Color? checkColor;
 
-  final TagsModel? tagsModel;
+  // final TagsModel? tagsModel;
+  //
+  // final TextEditingController? addTagCont;
 
-  final TextEditingController? addTagCont;
-
-  final Function(Map<String, dynamic>)? addDocument;
+  final Function(V)? addDocument;
 
   final bool? addButton;
+
+  // final void Function(V)? onAddPressed;
 
 
   MultiSelectDialog({
@@ -105,10 +107,11 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
     this.searchTextStyle,
     this.selectedItemsTextStyle,
     this.checkColor,
-    this.tagsModel,
-    this.addTagCont,
+    // this.tagsModel,
+    // this.addTagCont,
     this.addDocument,
-    this.addButton
+    this.addButton,
+    // this.onAddPressed
   });
 
   @override
@@ -242,11 +245,11 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                                 padding: const EdgeInsets.all(4.0),
                                 child: ElevatedButton(
                                   child: Text("Add"),
-                                  onPressed: () {
-                                    widget.tagsModel!.name = widget.addTagCont!.text;
-                                    widget.addDocument!(widget.tagsModel!.toJson());
-                                    widget.addTagCont!.clear();
-                                  },
+                                  onPressed: () =>
+                                    widget.addDocument
+                                    // widget.tagsModel!.name = widget.addTagCont!.text;
+                                    // widget.addDocument!(widget.tagsModel!.toJson());
+                                    // widget.addTagCont!.clear();
                                 ),
                               )),
                               onChanged: (val) {
