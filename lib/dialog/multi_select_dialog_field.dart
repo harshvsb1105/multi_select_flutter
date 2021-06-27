@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/Models/TagsModel.dart';
 import '../util/multi_select_list_type.dart';
 import '../util/multi_select_item.dart';
 import '../chip_display/multi_select_chip_display.dart';
@@ -106,6 +105,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   final GlobalKey<FormFieldState>? key;
   FormFieldState<List<V>>? state;
 
+
   MultiSelectDialogField({
     required this.items,
     required this.onConfirm,
@@ -183,6 +183,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 addDocument: addDocument,
                 addButton: addButton,
               );
+              print("Inside _MultiSelectDialogFieldView :: ${addDocument}");
               return _MultiSelectDialogFieldView<V?>._withState(
                   field as _MultiSelectDialogFieldView<V?>, state);
             });
@@ -222,6 +223,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final Function(V)? addDocument;
   final bool? addButton;
   FormFieldState<List<V>>? state;
+
 
   _MultiSelectDialogFieldView(
       {required this.items,
@@ -371,6 +373,7 @@ class __MultiSelectDialogFieldViewState<V>
       barrierColor: widget.barrierColor,
       context: context,
       builder: (ctx) {
+        print("Inside showdialog :: ${widget.addDocument}");
         return MultiSelectDialog<V>(
           checkColor: widget.checkColor,
           selectedItemsTextStyle: widget.selectedItemsTextStyle,
