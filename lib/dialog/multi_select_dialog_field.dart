@@ -95,7 +95,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   //
   // final TextEditingController? addTagCont;
 
-  final Function(V)? addDocument;
+  final void Function(V)? addDocument;
 
   final bool? addButton;
 
@@ -220,7 +220,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final Color? checkColor;
   // final TagsModel? tagsModel;
   // final TextEditingController? addTagCont;
-  final Function(V)? addDocument;
+  final void Function(V)? addDocument;
   final bool? addButton;
   FormFieldState<List<V>>? state;
 
