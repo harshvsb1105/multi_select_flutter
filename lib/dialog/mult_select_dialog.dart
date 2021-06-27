@@ -77,7 +77,7 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
   //
   // final TextEditingController? addTagCont;
 
-  final Function(V)? addDocument;
+  final void Function(V)? addDocument;
 
   final bool? addButton;
 
@@ -231,6 +231,7 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                             padding: EdgeInsets.only(left: 10),
                             child: widget.addButton == true
                                 ? TextField(
+                              // controller: widget.addTagCont,
                               style: widget.searchTextStyle,
                               decoration: InputDecoration(
                                 hintStyle: widget.searchHintStyle,
