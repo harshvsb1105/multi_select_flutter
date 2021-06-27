@@ -73,15 +73,12 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
   /// Set the color of the check in the checkbox
   final Color? checkColor;
 
-  // final TagsModel? tagsModel;
-
   final TextEditingController? addTagCont;
 
   final void Function(List<V>)? addDocument;
 
   final bool? addButton;
 
-  // final void Function(V)? onAddPressed;
 
 
   MultiSelectDialog({
@@ -107,11 +104,9 @@ class MultiSelectDialog<V> extends StatefulWidget with MultiSelectActions<V> {
     this.searchTextStyle,
     this.selectedItemsTextStyle,
     this.checkColor,
-    // this.tagsModel,
     this.addTagCont,
     this.addDocument,
     this.addButton,
-    // this.onAddPressed
   });
 
   @override

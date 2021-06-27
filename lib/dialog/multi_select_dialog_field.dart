@@ -92,8 +92,6 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Set the color of the check in the checkbox
   final Color? checkColor;
 
-  // final TagsModel? tagsModel;
-
   final TextEditingController? addTagCont;
 
   final void Function(List<V>)? addDocument;
@@ -138,7 +136,6 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     this.validator,
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
-    // this.tagsModel,
     this.addTagCont,
     this.addDocument,
     this.addButton,
@@ -179,12 +176,10 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 searchHintStyle: searchHintStyle,
                 selectedItemsTextStyle: selectedItemsTextStyle,
                 checkColor: checkColor,
-                // tagsModel: tagsModel,
                 addTagCont: addTagCont,
                 addDocument: addDocument,
                 addButton: addButton,
               );
-              print("Inside _MultiSelectDialogFieldView :: ${addDocument}");
               return _MultiSelectDialogFieldView<V?>._withState(
                   field as _MultiSelectDialogFieldView<V?>, state);
             });
@@ -219,7 +214,6 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final TextStyle? searchTextStyle;
   final TextStyle? searchHintStyle;
   final Color? checkColor;
-  // final TagsModel? tagsModel;
   final TextEditingController? addTagCont;
   final void Function(List<V>)? addDocument;
   final bool? addButton;
@@ -254,7 +248,6 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
       this.searchHintStyle,
       this.selectedItemsTextStyle,
       this.checkColor,
-      // this.tagsModel,
       this.addTagCont,
       this.addDocument,
       this.addButton});
@@ -289,7 +282,6 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
         searchTextStyle = field.searchTextStyle,
         selectedItemsTextStyle = field.selectedItemsTextStyle,
         checkColor = field.checkColor,
-        // tagsModel = field.tagsModel,
         addTagCont = field.addTagCont,
         addDocument = field.addDocument,
         addButton = field.addButton,
@@ -374,7 +366,6 @@ class __MultiSelectDialogFieldViewState<V>
       barrierColor: widget.barrierColor,
       context: context,
       builder: (ctx) {
-        print("Inside showdialog :: ${widget.addDocument}");
         return MultiSelectDialog<V>(
           checkColor: widget.checkColor,
           selectedItemsTextStyle: widget.selectedItemsTextStyle,
@@ -397,7 +388,6 @@ class __MultiSelectDialogFieldViewState<V>
           searchable: widget.searchable ?? false,
           confirmText: widget.confirmText,
           cancelText: widget.cancelText,
-          // tagsModel: widget.tagsModel,
           addTagCont: widget.addTagCont,
           addDocument: widget.addDocument,
           addButton: widget.addButton,
