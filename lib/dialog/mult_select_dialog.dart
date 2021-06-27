@@ -247,11 +247,6 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                                 child: ElevatedButton(
                                   child: Text("Add"),
                                   onPressed: () {
-                                    print("blah blah");
-                                     // widget.addDocument;
-                                    // widget.tagsModel!.name = widget.addTagCont!.text ?? "";
-                                    // print("zzzzzzz:::${widget.tagsModel!.name ?? ""}");
-                                    // widget.tagsModel!.news = [];
                                     widget.addDocument!(_selectedValues);
                                     widget.addTagCont!.clear();
                                   }
@@ -260,8 +255,6 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                               )),
                               onChanged: (val) {
                                 setState(() {
-                                  // widget.tagsModel!.name = val;
-                                  // print("name:: ${widget.tagsModel!.name}");
                                   _items = widget.updateSearchQuery(
                                       val, widget.items);
                                 });
