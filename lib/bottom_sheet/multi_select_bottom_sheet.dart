@@ -76,6 +76,12 @@ class MultiSelectBottomSheet<V> extends StatefulWidget
   /// Set the color of the check in the checkbox
   final Color? checkColor;
 
+  final TextEditingController? addTagCont;
+
+  final void Function(List<V>)? addDocument;
+
+  final bool? addButton;
+
   MultiSelectBottomSheet({
     required this.items,
     required this.initialValue,
@@ -99,7 +105,7 @@ class MultiSelectBottomSheet<V> extends StatefulWidget
     this.searchHint,
     this.searchHintStyle,
     this.selectedItemsTextStyle,
-    this.checkColor,
+    this.checkColor, this.addTagCont, this.addDocument, this.addButton,
   });
 
   @override
@@ -226,16 +232,91 @@ class _MultiSelectBottomSheetState<V> extends State<MultiSelectBottomSheet<V>> {
                         ? Expanded(
                             child: Container(
                               padding: EdgeInsets.only(left: 10),
-                              child: TextField(
-                                autofocus: true,
+                              child: widget.addButton == true
+                                  ? TextField(
+                                controller: widget.addTagCont,
                                 style: widget.searchTextStyle,
                                 decoration: InputDecoration(
                                   hintStyle: widget.searchHintStyle,
                                   hintText: widget.searchHint ?? "Search",
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: widget.selectedColor ??
-                                            Theme.of(context).primaryColor),
+                                      color: widget.selectedColor ??
+                                          Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                ).copyWith(suffixIcon: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        widget.addDocument!(_selectedValues);
+                                        widget.addTagCont!.clear();
+                                      },
+                                      child: Container(
+                                        width: 40,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(40.0),
+                                          color: const Color(0xccedeef2),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: const Color(0x3e9f9f9f),
+                                              offset: Offset(1, 1),
+                                              blurRadius: 4,
+                                            ),
+                                          ],
+                                        ),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(40.0),
+                                            gradient: LinearGradient(
+                                              begin: Alignment(0.82, 0.63),
+                                              end: Alignment(-0.83, -0.69),
+                                              colors: [
+                                                const Color(0xfff8f8fc),
+                                                const Color(0xfff2f2f5)
+                                              ],
+                                              stops: [0.0, 1.0],
+                                            ),
+                                            border:
+                                            Border.all(width: 1.0, color: const Color(0xff575F6B)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: const Color(0xffffffff),
+                                                offset: Offset(-1, -1),
+                                                blurRadius: 4,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Center(
+                                            child: Text( "Add",
+                                              style: TextStyle(
+                                                  fontFamily: "Avenir",fontSize: 12, fontWeight: FontWeight.bold, color: const Color(0xFF575F6B)
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                      ),
+                                    )
+                                )),
+                                onChanged: (val) {
+                                  setState(() {
+                                    _items = widget.updateSearchQuery(
+                                        val, widget.items);
+                                  });
+                                },
+                              )
+                                  : TextField(
+                                style: widget.searchTextStyle,
+                                decoration: InputDecoration(
+                                  hintStyle: widget.searchHintStyle,
+                                  hintText: widget.searchHint ?? "Search",
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: widget.selectedColor ??
+                                          Theme.of(context).primaryColor,
+                                    ),
                                   ),
                                 ),
                                 onChanged: (val) {

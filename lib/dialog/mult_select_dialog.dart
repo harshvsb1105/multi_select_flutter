@@ -239,14 +239,58 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
                                 ),
                               ).copyWith(suffixIcon: Padding(
                                 padding: const EdgeInsets.all(4.0),
-                                child: ElevatedButton(
-                                  child: Text("Add"),
-                                  onPressed: () {
+                                child: InkWell(
+                                  onTap: () {
                                     widget.addDocument!(_selectedValues);
                                     widget.addTagCont!.clear();
-                                  }
+                                  },
+                                  child: Container(
+                                    width: 40,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(40.0),
+                                      color: const Color(0xccedeef2),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: const Color(0x3e9f9f9f),
+                                          offset: Offset(1, 1),
+                                          blurRadius: 4,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(40.0),
+                                        gradient: LinearGradient(
+                                          begin: Alignment(0.82, 0.63),
+                                          end: Alignment(-0.83, -0.69),
+                                          colors: [
+                                            const Color(0xfff8f8fc),
+                                            const Color(0xfff2f2f5)
+                                          ],
+                                          stops: [0.0, 1.0],
+                                        ),
+                                        border:
+                                        Border.all(width: 1.0, color: const Color(0xff575F6B)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: const Color(0xffffffff),
+                                            offset: Offset(-1, -1),
+                                            blurRadius: 4,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: Text( "Add",
+                                          style: TextStyle(
+                                              fontFamily: "Avenir",fontSize: 12, fontWeight: FontWeight.bold, color: const Color(0xFF575F6B)
+                                          ),
+                                        ),
+                                      ),
+                                    ),
 
-                                ),
+                                  ),
+                                )
                               )),
                               onChanged: (val) {
                                 setState(() {
