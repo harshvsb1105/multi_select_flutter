@@ -253,7 +253,7 @@ class _MultiSelectBottomSheetState<V> extends State<MultiSelectBottomSheet<V>> {
                                         widget.addTagCont!.clear();
                                       },
                                       child: Container(
-                                        width: 40,
+                                        width: 60,
                                         height: 30,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(40.0),
