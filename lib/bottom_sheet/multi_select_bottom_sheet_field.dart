@@ -100,6 +100,12 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
   /// Set the color of the check in the checkbox
   final Color? checkColor;
 
+  final TextEditingController? addTagCont;
+
+  final void Function(List<V>)? addDocument;
+
+  final bool? addButton;
+
   final AutovalidateMode autovalidateMode;
   final FormFieldValidator<List<V>>? validator;
   final FormFieldSetter<List<V>>? onSaved;
@@ -141,6 +147,7 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
     this.onSaved,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
+    this.addTagCont, this.addDocument, this.addButton,
   }) : super(
             key: key,
             onSaved: onSaved,
@@ -180,6 +187,9 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
                 selectedColor: selectedColor,
                 shape: shape,
                 checkColor: checkColor,
+                    addTagCont: addTagCont,
+                    addDocument: addDocument,
+                    addButton: addButton,
               );
               return _MultiSelectBottomSheetFieldView<V?>._withState(
                   view as _MultiSelectBottomSheetFieldView<V?>, state);
@@ -218,6 +228,9 @@ class _MultiSelectBottomSheetFieldView<V> extends StatefulWidget {
   final TextStyle? searchTextStyle;
   final TextStyle? searchHintStyle;
   final Color? checkColor;
+  final TextEditingController? addTagCont;
+  final void Function(List<V>)? addDocument;
+  final bool? addButton;
   FormFieldState<List<V>>? state;
 
   _MultiSelectBottomSheetFieldView({
@@ -250,12 +263,12 @@ class _MultiSelectBottomSheetFieldView<V> extends StatefulWidget {
     this.searchTextStyle,
     this.searchHintStyle,
     this.selectedItemsTextStyle,
-    this.checkColor,
+    this.checkColor, this.addTagCont, this.addDocument, this.addButton,
   });
 
   /// This constructor allows a FormFieldState to be passed in. Called by MultiSelectBottomSheetField.
   _MultiSelectBottomSheetFieldView._withState(
-      _MultiSelectBottomSheetFieldView<V> field, FormFieldState<List<V>> state)
+      _MultiSelectBottomSheetFieldView<V> field, FormFieldState<List<V>> state,)
       : items = field.items,
         title = field.title,
         buttonText = field.buttonText,
@@ -286,6 +299,9 @@ class _MultiSelectBottomSheetFieldView<V> extends StatefulWidget {
         searchTextStyle = field.searchTextStyle,
         selectedItemsTextStyle = field.selectedItemsTextStyle,
         checkColor = field.checkColor,
+        addTagCont = field.addTagCont,
+        addDocument = field.addDocument,
+        addButton = field.addButton,
         state = state;
 
   @override
@@ -389,6 +405,9 @@ class __MultiSelectBottomSheetFieldViewState<V>
             cancelText: widget.cancelText,
             confirmText: widget.confirmText,
             initialValue: _selectedItems,
+            addTagCont: widget.addTagCont,
+            addDocument: widget.addDocument,
+            addButton: widget.addButton,
             onConfirm: (selected) {
               if (widget.state != null) {
                 widget.state!.didChange(selected);
